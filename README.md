@@ -2,8 +2,7 @@
 
 ```bash
 $ npm install
-$ npm run server
-$ npm run client
+$ npm run dev
 ```
 
 然后打开 <http://localhost:1234>，控制台查看。<http://localhost:8888> 模拟后台接口返回，可以打开查看数据返回的形式
