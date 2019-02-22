@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>window.name+iframe 跨域 demo</title>
+</head>
+<body>
+  <script> 
+    function getData(url, fn) {
+      var iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      var state = 0;
+    
+      iframe.onload = function() {
+        if(state === 1) {
+          fn(iframe.contentWindow.name);
+          // iframe.contentWindow.document.write('');
+          // iframe.contentWindow.close();
+          document.body.removeChild(iframe);
+        } else if(state === 0) {
+          state = 1;
+          iframe.contentWindow.location = 'about:blank';
+          // 也可以
+          // iframe.src = 'about:blank';
+          /*
+          每个 iframe 都有个子窗口（可以用 iframe.contentWindow 获取）
+          重置 iframe.src 或者 iframe.contentWindow.location.href 都会引起子窗口页面的刷新，以及内容的变化（指向重置后的 url）
+          如果重置的是 iframe.src，那么刷新后 iframe.src === iframe.contentWindow.location.href
+          如果重置的是 iframe.contentWindow.location.href，iframe.src 值不变
+          iframe 里面包含了子窗口，所以操作 iframe 的内容会影响子窗口，反之操作子窗口的内容则不会影响 “父辈” iframe 的属性
+          */
+        }
+      };
+
+      iframe.src = url;
+      document.body.appendChild(iframe)
+    } 
+    
+    // 调用
+    // 服务器地址
+    var url = 'http://localhost:8888';
+    getData(url, function(data) { // 处理数据 data就是window.name的值(string)
+      data = JSON.parse(data);
+      console.log(data);
+    });
+  </script>
+</body>
+</html>
