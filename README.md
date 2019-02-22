@@ -6,7 +6,7 @@ $ npm run server
 $ npm run client
 ```
 
-然后打开 http://localhost:1234，控制台查看。http://localhost:8888 模拟后台接口返回，可以打开查看数据返回的形式
+然后打开 <http://localhost:1234>，控制台查看。<http://localhost:8888> 模拟后台接口返回，可以打开查看数据返回的形式
 
 跨域原理：[window.name](https://developer.mozilla.org/en-US/docs/Web/API/Window/name) 的值不是一个普通的全局变量，**而是当前窗口的名字**。window.name 的神奇之处在于它的值在不同的页面，甚至不同的域名加载后依然存在
 
